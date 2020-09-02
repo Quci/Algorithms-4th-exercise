@@ -1,6 +1,6 @@
 // demo-1.3.1.4 calculate specimen standard deviation
 
-package part1.sction13;
+package part1.section1_3;
 
 import edu.princeton.cs.algs4.*;
 
@@ -25,6 +25,7 @@ public class Stats {
             sum += (x - mean) * (x - mean);
         }
         double std = Math.sqrt(sum / (N - 1));
+
         StdOut.printf("Mean: %.2f\n", mean);
         StdOut.printf("Std dev: %.2f\n", std);
     }
