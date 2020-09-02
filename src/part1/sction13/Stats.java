@@ -1,0 +1,31 @@
+// demo-1.3.1.4 calculate specimen standard deviation
+
+package part1.sction13;
+
+import edu.princeton.cs.algs4.*;
+
+public class Stats {
+    public static void main(String[] args) {
+        Bag<Double> numbers = new Bag<Double>();
+
+        double[] specimens = new double[]{123, 22.32, 56.32, 99, 98.321, 854.21, 554.1};
+        for (double x : specimens) {
+            numbers.add(x);
+        }
+
+        int N = numbers.size();
+        double sum = 0.0;
+        for (double x : numbers) {
+            sum += x;
+        }
+        double mean = sum / N;
+
+        sum = 0.0;
+        for (double x : numbers) {
+            sum += (x - mean) * (x - mean);
+        }
+        double std = Math.sqrt(sum / (N - 1));
+        StdOut.printf("Mean: %.2f\n", mean);
+        StdOut.printf("Std dev: %.2f\n", std);
+    }
+}
