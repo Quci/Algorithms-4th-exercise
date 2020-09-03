@@ -12,6 +12,10 @@ public class FixedCapacityStackOfStrings {
         return N == 0;
     }
 
+    public int size() {
+        return N;
+    }
+
     public void push(String item) {
         a[N++] = item;
     }
