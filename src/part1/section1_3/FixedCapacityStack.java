@@ -4,8 +4,8 @@ public class FixedCapacityStack<T> {
     private T[] a; // stack entries
     private int N; // size
 
-    public FixedCapacityStack(int cap) {
-        a = (T[]) new Object[cap];
+    public FixedCapacityStack() {
+        a = (T[]) new Object[1];
     }
 
     public boolean isEmpty() {
@@ -17,11 +17,27 @@ public class FixedCapacityStack<T> {
     }
 
     public void push(T item) {
+        if(N == a.length) {
+            resize(a.length * 2);
+        }
         a[N++] = item;
     }
 
     public T pop() {
-        return a[--N];
+        T item = a[--N];
+        a[N] = null; // gc
+        if(N > 0 && N == a.length / 4) {
+            resize(a.length / 2);
+        }
+        return item;
+    }
+
+    public void resize(int max) {
+        T[] temp = (T[]) new Object[max];
+        for(int i = 0; i < N; i++) {
+            temp[i] = a[i];
+        }
+        a = temp;
     }
 
 }
