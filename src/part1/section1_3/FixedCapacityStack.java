@@ -1,6 +1,7 @@
 package part1.section1_3;
+import java.util.Iterator;
 
-public class FixedCapacityStack<T> {
+public class FixedCapacityStack<T> implements Iterable<T>{
     private T[] a; // stack entries
     private int N; // size
 
@@ -40,4 +41,22 @@ public class FixedCapacityStack<T> {
         a = temp;
     }
 
+    public Iterator<T> iterator() {
+        return new ReverseArrayIterator();
+    }
+
+    private class ReverseArrayIterator implements Iterator<T> {
+        private int i = N;
+        public boolean hasNext() {
+            return i > 0;
+        }
+
+        public T next() {
+            return a[--i];
+        }
+
+        public void remove() {
+
+        }
+    }
 }
