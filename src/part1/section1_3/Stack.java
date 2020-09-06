@@ -34,10 +34,10 @@ public class Stack<T> implements Iterable<T>{
     }
 
     public Iterator<T> iterator() {
-        return new ReverseArrayIterator();
+        return new ReverseIterator();
     }
 
-    private class ReverseArrayIterator implements Iterator<T> {
+    private class ReverseIterator implements Iterator<T> {
         private Node current = first;
         public boolean hasNext() {
             return current != null;
