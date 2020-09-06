@@ -40,7 +40,7 @@ public class Stack<T> implements Iterable<T>{
     private class ReverseArrayIterator implements Iterator<T> {
         private Node current = first;
         public boolean hasNext() {
-            return current.next != null;
+            return current != null;
         }
 
         public T next() {
