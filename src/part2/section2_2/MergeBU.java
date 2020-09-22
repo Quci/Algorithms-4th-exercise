@@ -1,4 +1,4 @@
-package part2.section2_1;
+package part2.section2_2;
 
 import edu.princeton.cs.algs4.StdOut;
 

@@ -1,44 +1,49 @@
-package part2.section2_1;
+package part2.section2_3;
 
 import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdRandom;
 
-public class Merge {
-    private static Comparable[] aux;
+import java.util.SortedMap;
 
+public class Quick {
     public static void sort(Comparable[] a) {
-        aux = new Comparable[a.length];
+//        StdRandom.shuffle(a);
         sort(a, 0, a.length - 1);
     }
 
-    public static void sort(Comparable[] a, int lo, int hi) {
+    private static void sort(Comparable[] a, int lo, int hi) {
         if (hi <= lo) {
             return;
         }
-        int mid = lo + (hi - lo) / 2;
-        sort(a, lo, mid);
-        sort(a, mid + 1, hi);
-        merge(a, lo, mid, hi);
+        int j = partition(a, lo, hi);
+        sort(a, lo, j - 1);
+        sort(a, j + 1, hi);
+
     }
 
-    private static void merge(Comparable[] a, int lo, int mid, int hi) {
+    private static int partition(Comparable[] a, int lo, int hi) {
+        // depart a: a[lo..i-1], a[i], a[i+1..hi];
         int i = lo;
-        int j = mid + 1;
-
-        // merge a[lo, mid] and a[mid+1, hi]
-        for (int k = lo; k <= hi; k++) {
-            aux[k] = a[k];
-        }
-        for (int k = lo; k <= hi; k++) {
-            if (i > mid) {
-                a[k] = aux[j++];
-            } else if (j > hi) {
-                a[k] = aux[i++];
-            } else if (less(a[i], a[j])) {
-                a[k] = aux[i++];
-            } else {
-                a[k] = aux[j++];
+        int j = hi + 1;
+        Comparable v = a[lo];
+        while (true) {
+            while (less(a[++i], v)) {
+                if (i == hi) {
+                    break;
+                }
             }
+            while (less(v, a[--j])) {
+                if (j == lo) {
+                    break;
+                }
+            }
+            if (i >= j) {
+                break;
+            }
+            exch(a, i, j);
         }
+        exch(a, lo, j);
+        return j;
     }
 
     private static boolean less(Comparable v, Comparable w) {
@@ -69,7 +74,6 @@ public class Merge {
 
     public static void main(String[] args) {
         String[] a = "sortexample".split("");
-
         sort(a);
         // to use assert: config VM options -ea
         assert isSorted(a) : "is not sorted";
